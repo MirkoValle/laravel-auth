@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\HomeController as GuestHomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,6 @@ Route::get('/home', [GuestHomeController::class, 'index'])->name('index.home'); 
 
 route::middleware('auth')->name('admin.')->prefix('admin/')->group(function(){
 
-        Route::get('home', [AdminHomeController::class, 'index'])->name('home'); //(Pagina Home per utenti loggati)
+        Route::resource("/projects", AdminProjectController::class);
     }
 );

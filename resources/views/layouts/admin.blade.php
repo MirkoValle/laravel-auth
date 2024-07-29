@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Boolpress Administration') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -33,7 +33,18 @@
                         <a class="nav-link" href="#" role="button">
                             Homepage
                         </a>
-                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.projects.index')}}">
+                                {{('Projects')}}
+                            </a>
+                            
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-link" href="{{ route('admin.projects.create')}}">
+                                {{('Add new project')}}
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
