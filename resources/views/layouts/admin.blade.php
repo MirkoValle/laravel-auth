@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Boolpress Administration') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -37,7 +37,7 @@
                             <a class="nav-link" href="{{ route('admin.projects.index')}}">
                                 {{('Projects')}}
                             </a>
-                            
+
                         </li>
                         <li class="nav-item">
 
@@ -90,5 +90,7 @@
             @yield('content')
         </main>
     </div>
+
+    @yield('scripts')
 </body>
 </html>

@@ -13,7 +13,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::paginate(10);
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -30,7 +30,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            "nome" => ["required", "min:1", "max:255"],
+            "linguaggio" =>["required", "min:1", "max:255"],
+            "info" =>["nullable", "max:255"],
+            "url_repo" =>["required", "url", "min:4", "max:255"],
+        ]);
         $newProject = Project::create($data);
 
         return redirect()->route('admin.projects.show', $newProject);
@@ -47,24 +52,33 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact("project"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $data = $request->validate([
+            "nome" => ["required", "min:1", "max:255"],
+            "linguaggio" =>["required", "min:1", "max:255"],
+            "info" =>["nullable", "max:255"],
+            "url_repo" =>["required", "url", "min:4", "max:255"],
+        ]);
+        $project->update($data);
+
+        return redirect()->route("admin.projects.show", $project);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('admin.projects.index');
     }
 }
